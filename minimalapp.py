@@ -3,21 +3,26 @@ from flask import Flask, render_template, request
 import sefira_game2
 app = Flask(__name__)
 
+new_game = sefira_game2.Game()
 
 @app.route('/', methods=["POST", "GET"])
 def hello_world():
-    guess = request.form.get("input_field")
-    if sefira_game2.today["number"] is None:
-        sefira_game2.number_picker()
+    guess = request.form.get("input_field")    
+    
 
-    print(sefira_game2.today.values())
-
+    
     if request.method == "POST":
-        sefira_game2.guess_num(guess)
-        return render_template("sefiracounter.html", day=sefira_game2.today["day"], n=sefira_game2.today["message"])
+        print(new_game.num)
+        print(new_game.message)
+        print(new_game.day)
+        new_game.guess_num(guess)
+        return render_template("sefiracounter.html", day=new_game.day, n=new_game.message)
     else:
-
-        return render_template("sefiracounter.html", day=sefira_game2.today["day"], n=sefira_game2.today["message"])
+        
+        print(new_game.num)
+        print(new_game.message)
+        print(new_game.day)
+        return render_template("sefiracounter.html", day=new_game.day, n=new_game.message)
 
 
 
