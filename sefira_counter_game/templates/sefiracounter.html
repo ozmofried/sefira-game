@@ -1,0 +1,60 @@
+{%extends "layout.html"%}
+
+{%block body%}
+
+  <main role="main" class="inner cover">
+    <script>
+      let seconds=20
+      function timer(){
+          if(seconds>0){
+            seconds -- 
+            document.getElementById('clock').innerHTML= seconds
+            delayer()
+          }
+          else if(seconds == 0){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET","/timed_out")
+            xhttp.send()
+            document.getElementById("myForm").reset()
+            setTimeout(location.reload(true), 2000)
+          }     
+      }
+      
+      function delayer(){
+      delay = setTimeout('timer()',1000)
+      }
+
+      function manage(content) {
+        var bt = document.getElementById('btSubmit');
+        if (content.value != '') {
+            bt.disabled = false;
+        }
+        else {
+            bt.disabled = true;
+        }
+    }
+      </script>
+
+
+    <h1 class="cover-heading">Enter the number which corresponds to sefira below:</h1>
+        <span id="clock" ></span>
+        <div class="form">
+
+          <h5>Your Score: {{score}}</h5>
+        <form id="myForm" action="/" method="POST">
+            <P> <h3 class="text-primary">{{day}}</h3></P>
+            <input class="form-control text-center font-weight-bold" 
+            placeholder="Please enter the number here" type="text" onkeyup="manage(this)" name="input_field" id="content" autofocus>
+            <input class="btn btn-lg btn-secondary m-2" id='btSubmit' type="submit" value="Try It" disabled>
+        </form>
+        <P> 
+          {%if n == "Try Again"%}
+              <h3 class="text-danger">{{n}}</h3>
+          {%else%}
+            <h3 class="text-success">{{n}}</h3>
+          {%endif%}
+        </P>
+        </div>
+  </main>
+
+  {%endblock%}
