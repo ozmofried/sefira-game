@@ -37,9 +37,7 @@ def login():
 @app.route('/', methods=["POST", "GET"])
 @login_required
 def game():
-    print(session['message'])
     score = session['score']
-    print(score)
     guess = request.form.get("input_field")    
     
     if request.method == "POST":
