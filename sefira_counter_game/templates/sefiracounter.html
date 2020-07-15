@@ -12,11 +12,7 @@
             delayer()
           }
           else if(seconds == 0){
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("GET","/timed_out")
-            xhttp.send()
-            document.getElementById("myForm").reset()
-            setTimeout(location.reload(true), 2000)
+            window. location. replace("/timed_out") 
           }     
       }
       
@@ -37,10 +33,13 @@
 
 
     <h1 class="cover-heading">Enter the number which corresponds to sefira below:</h1>
-        <span id="clock" ></span>
+        <div>
+        <span class="position-sticky">Seconds left:</span> <span id="clock" > </span>
+        </div>
         <div class="form">
-
+             
           <h5>Your Score: {{score}}</h5>
+          
         <form id="myForm" action="/" method="POST">
             <P> <h3 class="text-primary">{{day}}</h3></P>
             <input class="form-control text-center font-weight-bold" 
