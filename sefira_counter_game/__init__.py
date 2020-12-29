@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+import os
 
 app = Flask(__name__)
 
 
-app.config["SECRET_KEY"]="hlfndjngonearojvn2v156df4b65zx51vfsz1d5v156"
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://gnrjraqdoihaxs:c637b97f64b3e7317638d8afc41f354c16738541ff4335978fc2d3c80909ccad@ec2-54-211-210-149.compute-1.amazonaws.com:5432/d61kpbpku9upil"
-
+app.config["SECRET_KEY"]= os.environ.get('SECRET_KEY')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
